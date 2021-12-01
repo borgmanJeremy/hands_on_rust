@@ -23,7 +23,11 @@ fn orc() -> (i32, String, FontCharType) {
     (2, "Orc".to_string(), to_cp437('o'))
 }
 
-pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Point) {
+pub fn spawn_monster(
+    ecs: &mut World,
+    rng: &mut RandomNumberGenerator,
+    pos: Point,
+) {
     let (hp, name, glyph) = match rng.roll_dice(1, 10) {
         1..=8 => goblin(),
         _ => orc(),
@@ -35,7 +39,7 @@ pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Poin
             color: ColorPair::new(WHITE, BLACK),
             glyph,
         },
-        MovingRandomly {},
+        ChasingPlayer {},
         Health {
             current: hp,
             max: hp,
