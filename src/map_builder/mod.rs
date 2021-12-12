@@ -2,10 +2,12 @@ use crate::prelude::*;
 use automata::CellularAutomataArchitect;
 use drunkard::DrunkardsWalkArchitect;
 use empty::EmptyArchitect;
+use prefab::apply_prefab;
 use rooms::RoomsArchitect;
 mod automata;
 mod drunkard;
 mod empty;
+mod prefab;
 mod rooms;
 const NUM_ROOMS: usize = 20;
 
@@ -156,6 +158,7 @@ impl MapBuilder {
             _ => Box::new(CellularAutomataArchitect {}),
         };
         let mut mb = architect.new(rng);
+        apply_prefab(&mut mb, rng);
         mb
     }
 }
